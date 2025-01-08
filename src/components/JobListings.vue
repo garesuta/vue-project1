@@ -1,6 +1,6 @@
 <script setup>
 // import jobData from '../jobs2.json'
-import { reactive,defineProps ,onMounted} from 'vue'
+import { reactive ,onMounted} from 'vue'
 import JobListing from './JobListing.vue'
 import { RouterLink } from 'vue-router'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
@@ -21,11 +21,11 @@ const state = reactive({
     isLoading:true
 })
 
-
 onMounted( async () => {
     try {
         const response = await axios.get('/api/jobs')
         // jobs.value = response.data use for ref
+        // console.log(process.env.VITE_API_HOST)
         state.jobs = response.data
         
     } catch (error) {
