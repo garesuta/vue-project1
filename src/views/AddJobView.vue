@@ -34,7 +34,7 @@ const handleSubmit = async () => {
         }
     }
     try {
-        const response = await axios.post(`${process.env.VUE_APP_DB_HOST}/jobs`,newJob)
+        const response = await axios.post(`/api/jobs`,newJob)
         // add toast     
         toast.success('Job Added Successfully')
         router.push(`/jobs/${response.data.id}`)   

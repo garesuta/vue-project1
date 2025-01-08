@@ -24,7 +24,14 @@ const form = reactive({
 })
 
 const state = reactive({
-    job: {},
+  job: {
+        Company: {
+            name: '',
+            Company_description: '',
+            contactEmail: '',
+            contactPhone: ''
+        }
+    },
     isLoading:true
 })
 
@@ -37,15 +44,15 @@ const handleSubmit = async () => {
         location: form.location,
         description: form.description,
         salary: form.salary,
-        company: {
-            name: form.company.name,
-            description: form.company.description,
+        Company: {
+          name: form.company.name,
+          Company_description: form.company.description,
             contactEmail: form.company.contactEmail,
             contactPhone: form.company.contactPhone
         }
     }
     try {
-        const response = await axios.put(`${process.env.VUE_APP_DB_HOST}/jobs/${jobId}`,updatedJob)
+        const response = await axios.put(`/api/jobs/${jobId}`,updatedJob)
         // add toast     
         toast.success('Job Updated Successfully')
         router.push(`/jobs/${response.data.id}`)   
@@ -58,7 +65,7 @@ const handleSubmit = async () => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get(`${process.env.VUE_APP_DB_HOST}/jobs/${jobId}`)
+        const response = await axios.get(`/api/jobs/${jobId}`)
         state.job = response.data
         //populate inputs
         form.type = state.job.type
@@ -66,10 +73,10 @@ onMounted(async () => {
         form.description = state.job.description
         form.salary = state.job.salary
         form.location = state.job.location
-        form.company.name = state.job.company.name
-        form.company.description = state.job.company.description
-        form.company.contactEmail= state.job.company.contactEmail
-        form.company.contactPhone = state.job.company.contactPhone
+        form.company.name = state.job.Company.name
+        form.company.description = state.job.Company.Company_description
+        form.company.contactEmail= state.job.Company.contactEmail
+        form.company.contactPhone = state.job.Company.contactPhone
     } catch (error) {
         console.error('Error fetching job',error); 
     } finally {
