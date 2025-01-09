@@ -23,7 +23,8 @@ const state = reactive({
 
 onMounted( async () => {
     try {
-        const response = await axios.get('/api/jobs')
+        // const response = await axios.get('/api/jobs')
+        const response = await axios.get(`${import.meta.env.VITE_API_HOST}/jobs`)
         // jobs.value = response.data use for ref
         // console.log(process.env.VITE_API_HOST)
         state.jobs = response.data

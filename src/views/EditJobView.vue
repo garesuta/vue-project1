@@ -52,7 +52,7 @@ const handleSubmit = async () => {
         }
     }
     try {
-        const response = await axios.put(`/api/jobs/${jobId}`,updatedJob)
+        const response = await axios.put(`${import.meta.env.VITE_API_HOST}/jobs/${jobId}`,updatedJob)
         // add toast     
         toast.success('Job Updated Successfully')
         router.push(`/jobs/${response.data.id}`)   
@@ -65,7 +65,7 @@ const handleSubmit = async () => {
 
 onMounted(async () => {
     try {
-        const response = await axios.get(`/api/jobs/${jobId}`)
+        const response = await axios.get(`${import.meta.env.VITE_API_HOST}/jobs/${jobId}`)
         state.job = response.data
         //populate inputs
         form.type = state.job.type
